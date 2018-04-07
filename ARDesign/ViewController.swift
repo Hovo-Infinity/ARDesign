@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var cameraStateLabel: UILabel!
     var sceneView: ARSCNView! = nil
     var debugView: DebugView! = nil
+    var relocalizing = false
     
     override func viewDidLoad() {
         debugView = Bundle.main.loadNibNamed("DebugView", owner: nil, options: nil)?.first as? DebugView
@@ -72,11 +73,9 @@ class ViewController: UIViewController {
         let x = translation.x
         let y = translation.y
         let z = translation.z
-        guard let shipScene = SCNScene(named: "ship.scn"),
-            let shipNode = shipScene.rootNode.childNode(withName: "ship", recursively: false)
-            else { return }
+        guard let shipScene = SCNScene(named: "skates.scn") else { return }
         
-        
+        let shipNode = shipScene.rootNode
         shipNode.position = SCNVector3(x,y,z)
         sceneView.scene.rootNode.addChildNode(shipNode)
     }
