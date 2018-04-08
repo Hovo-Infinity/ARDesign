@@ -22,6 +22,8 @@ extension ViewController: ARSCNViewDelegate {
             node.addChildNode(carpet)
         } else {
             // TODO add poster for walls
+            let wallpaper = createWallpaperFor(planeAnchor: planeAnchor)
+            node.addChildNode(wallpaper)
         }
     }
     
@@ -38,6 +40,19 @@ extension ViewController: ARSCNViewDelegate {
         return planeNode
     }
     
+    func createWallpaperFor(planeAnchor: ARPlaneAnchor) -> SCNNode {
+        let planeGeometry: ARSCNPlaneGeometry? = ARSCNPlaneGeometry(device: ViewController.currentDevice!)
+        planeGeometry?.update(from: planeAnchor.geometry)
+        let planeNode = SCNNode(geometry: planeGeometry)
+        planeNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "wallpaper")
+        //        let x = CGFloat(planeAnchor.center.x)
+        //        let y = CGFloat(planeAnchor.center.y)
+        //        let z = CGFloat(planeAnchor.center.z)
+        //        planeNode.position = SCNVector3(x,y,z)
+        //        planeNode.eulerAngles.x = -.pi / 2
+        return planeNode
+    }
+    
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
         node.enumerateChildNodes { (child, _) in
@@ -48,6 +63,8 @@ extension ViewController: ARSCNViewDelegate {
             node.addChildNode(carpet)
         } else {
             // TODO same for wall posters
+            let wallpaper = createWallpaperFor(planeAnchor: planeAnchor)
+            node.addChildNode(wallpaper)
         }
     }
     
