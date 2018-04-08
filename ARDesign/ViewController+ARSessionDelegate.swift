@@ -8,7 +8,7 @@
 
 import ARKit
 
-extension ViewController: ARSCNViewDelegate {    
+extension ViewController: ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         session.run(session.configuration!)
     }
@@ -26,16 +26,15 @@ extension ViewController: ARSCNViewDelegate {
     }
     
     func createCarpetFor(planeAnchor: ARPlaneAnchor) -> SCNNode {
-        let width = CGFloat(planeAnchor.extent.x)
-        let height = CGFloat(planeAnchor.extent.z)
-        let plane = SCNPlane(width: width, height: height)
-        plane.materials.first?.diffuse.contents = UIImage(named: "carpet")
-        let planeNode = SCNNode(geometry: plane)
-        let x = CGFloat(planeAnchor.center.x)
-        let y = CGFloat(planeAnchor.center.y)
-        let z = CGFloat(planeAnchor.center.z)
-        planeNode.position = SCNVector3(x,y,z)
-        planeNode.eulerAngles.x = -.pi / 2
+        let planeGeometry: ARSCNPlaneGeometry? = ARSCNPlaneGeometry(device: ViewController.currentDevice!)
+        planeGeometry?.update(from: planeAnchor.geometry)
+        let planeNode = SCNNode(geometry: planeGeometry)
+        planeNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "carpet")
+//        let x = CGFloat(planeAnchor.center.x)
+//        let y = CGFloat(planeAnchor.center.y)
+//        let z = CGFloat(planeAnchor.center.z)
+//        planeNode.position = SCNVector3(x,y,z)
+//        planeNode.eulerAngles.x = -.pi / 2
         return planeNode
     }
     
@@ -64,37 +63,63 @@ extension ViewController: ARSCNViewDelegate {
             break
         case .limited(let reason): do {
             cameraStateLabel.text = "Limited tracking \(reason)..."
-            if reason == .relocalizing {
-                relocalizing = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {[unowned self] in
-                    if self.relocalizing {
-                        self.askUserToResetTracking()
-                    }
-                }
-            }
+            handleLimitedTrackingState(for: reason)
             break
             }
         }
     }
-    
-    func askUserToResetTracking() {
-        let okAction = UIAlertAction(title: "Ok", style: .default) {[unowned self] (action) in
-            self.sceneView.session.pause()
-            self.sceneView.session.run(self.sceneView.session.configuration!, options: [.resetTracking, .removeExistingAnchors])
+
+    private func handleLimitedTrackingState(for reason: ARCamera.TrackingState.Reason) {
+        switch reason {
+        case .excessiveMotion:
+            askUserToSlowDownMotion()
+            break
+        case .initializing:
+            break
+        case .insufficientFeatures:
+            askUserForMoreLight()
+            break
+        case .relocalizing:
+            self.relocalizing = true
+            askUserToResetTracking()
+            break
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {[unowned self] (action) in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {[unowned self] in
-                if self.relocalizing {
-                    self.askUserToResetTracking()
+    }
+    
+    private func askUserToResetTracking() {
+        if self.relocalizing {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {[unowned self] in
+                let okAction = UIAlertAction(title: "Ok", style: .default) {[unowned self] (action) in
+                    self.sceneView.session.pause()
+                    self.sceneView.session.run(self.sceneView.session.configuration!, options: [.resetTracking, .removeExistingAnchors])
                 }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {[unowned self] (action) in
+                    if self.relocalizing {
+                        self.askUserToResetTracking()
+                    }
+                }
+                let alertController = UIAlertController(title: "Relocalizing take too long time", message: "Relocalizing take too long time, do You want to reset tracking?", preferredStyle: .alert)
+                alertController.addAction(okAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
             }
         }
-        let alertController = UIAlertController(title: "Relocalizing take too long time", message: "Relocalizing take too long time, do You want to reset tracking?", preferredStyle: .alert)
+    }
+    
+    private func askUserToSlowDownMotion() {
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        let alertController = UIAlertController(title: "Excessive Motion", message: "Excessive motion, please slow down", preferredStyle: .alert)
         alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }
     
+    private func askUserForMoreLight() {
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        let alertController = UIAlertController(title: "Insufficient Features", message: "Lack of features visible to the camera, please provide more light", preferredStyle: .alert)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
         return true
     }

@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var sceneView: ARSCNView! = nil
     var debugView: DebugView! = nil
     var relocalizing = false
+    static let currentDevice: MTLDevice? = MTLCreateSystemDefaultDevice()
     
     override func viewDidLoad() {
         debugView = Bundle.main.loadNibNamed("DebugView", owner: nil, options: nil)?.first as? DebugView
