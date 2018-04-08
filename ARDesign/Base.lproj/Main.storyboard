@@ -24,16 +24,74 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjv-al-bl9">
+                                <rect key="frame" x="0.0" y="623" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="FUo-S9-ZIC"/>
+                                    <constraint firstAttribute="width" constant="44" id="stQ-cC-D1E"/>
+                                </constraints>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="ic_menu_close_arrow"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Enb-qG-fhd"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qgv-GK-WTP">
+                                <rect key="frame" x="52" y="667" width="323" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="aTd-Na-zM1"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="8" id="Boh-9m-r8T">
+                                    <size key="itemSize" width="44" height="44"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="simpleCell" id="ClP-fq-VG9">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="cfa-U6-qGT"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="q4q-tW-FnA"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="a6P-Bf-v7A" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Aeg-VC-VO3"/>
                             <constraint firstItem="a6P-Bf-v7A" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="NiV-Pb-jMM"/>
+                            <constraint firstItem="qgv-GK-WTP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="OnE-E0-3iv"/>
+                            <constraint firstItem="qgv-GK-WTP" firstAttribute="leading" secondItem="gjv-al-bl9" secondAttribute="trailing" constant="8" id="XuP-au-hDB"/>
+                            <constraint firstItem="gjv-al-bl9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bcC-mY-but"/>
+                            <constraint firstItem="qgv-GK-WTP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="rNW-Uu-P2t"/>
+                            <constraint firstItem="gjv-al-bl9" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="vqT-qY-EyD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="cameraStateLabel" destination="a6P-Bf-v7A" id="qrb-YK-kED"/>
+                        <outlet property="collectionViewBottomConstraint" destination="OnE-E0-3iv" id="qhb-8S-Kow"/>
+                        <outlet property="menuButton" destination="gjv-al-bl9" id="dhh-My-hwd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -41,4 +99,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="122.78860569715144"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_menu_close_arrow" width="44" height="44"/>
+    </resources>
 </document>

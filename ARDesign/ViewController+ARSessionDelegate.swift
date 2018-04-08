@@ -32,11 +32,6 @@ extension ViewController: ARSCNViewDelegate {
         planeGeometry?.update(from: planeAnchor.geometry)
         let planeNode = SCNNode(geometry: planeGeometry)
         planeNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "carpet")
-//        let x = CGFloat(planeAnchor.center.x)
-//        let y = CGFloat(planeAnchor.center.y)
-//        let z = CGFloat(planeAnchor.center.z)
-//        planeNode.position = SCNVector3(x,y,z)
-//        planeNode.eulerAngles.x = -.pi / 2
         return planeNode
     }
     
@@ -45,11 +40,6 @@ extension ViewController: ARSCNViewDelegate {
         planeGeometry?.update(from: planeAnchor.geometry)
         let planeNode = SCNNode(geometry: planeGeometry)
         planeNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "wallpaper")
-        //        let x = CGFloat(planeAnchor.center.x)
-        //        let y = CGFloat(planeAnchor.center.y)
-        //        let z = CGFloat(planeAnchor.center.z)
-        //        planeNode.position = SCNVector3(x,y,z)
-        //        planeNode.eulerAngles.x = -.pi / 2
         return planeNode
     }
     

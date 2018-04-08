@@ -11,10 +11,31 @@ import ARKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var collectionViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var cameraStateLabel: UILabel!
+    @IBOutlet weak var menuButton: UIButton!
     var sceneView: ARSCNView! = nil
     var debugView: DebugView! = nil
     var relocalizing = false
+    var datas = [#imageLiteral(resourceName: "carpet_category"), #imageLiteral(resourceName: "wallPoster"), #imageLiteral(resourceName: "chair"), #imageLiteral(resourceName: "table"), #imageLiteral(resourceName: "wallPicture")]
+    
+    private var menuOpened = false {
+        didSet {
+            if menuOpened {
+                menuButton.transform = CGAffineTransform(rotationAngle: .pi)
+                UIView.beginAnimations(nil, context: nil)
+                UIView.setAnimationDuration(5)
+                collectionViewBottomConstraint.constant = -44
+                UIView.commitAnimations()
+            } else {
+                menuButton.transform = CGAffineTransform(rotationAngle: 0)
+                UIView.beginAnimations(nil, context: nil)
+                UIView.setAnimationDuration(5)
+                collectionViewBottomConstraint.constant = 0
+                UIView.commitAnimations()
+            }
+        }
+    }
     static let currentDevice: MTLDevice? = MTLCreateSystemDefaultDevice()
     
     override func viewDidLoad() {
@@ -75,7 +96,7 @@ class ViewController: UIViewController {
         let y = translation.y
         let z = translation.z
         guard let shipScene = SCNScene(named: "skates.scn") else { return }
-        
+
         let shipNode = shipScene.rootNode
         shipNode.position = SCNVector3(x,y,z)
         sceneView.scene.rootNode.addChildNode(shipNode)
@@ -96,4 +117,7 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func buttonTapped(_ sender: UIButton!) {
+        menuOpened = !menuOpened
+    }
 }
