@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		456DAD79207D2C6F0052DC0F /* coffetable_wt_chair.scn in Resources */ = {isa = PBXBuildFile; fileRef = 456DAD76207D2C6E0052DC0F /* coffetable_wt_chair.scn */; };
+		456DAD7A207D2C6F0052DC0F /* lamp_wall.scn in Resources */ = {isa = PBXBuildFile; fileRef = 456DAD77207D2C6F0052DC0F /* lamp_wall.scn */; };
+		456DAD7B207D2C6F0052DC0F /* coke_can.scn in Resources */ = {isa = PBXBuildFile; fileRef = 456DAD78207D2C6F0052DC0F /* coke_can.scn */; };
+		456DAD7F207D2C7A0052DC0F /* COKE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 456DAD7C207D2C790052DC0F /* COKE.jpg */; };
+		456DAD80207D2C7A0052DC0F /* fab111.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 456DAD7D207D2C7A0052DC0F /* fab111.bmp */; };
+		456DAD81207D2C7A0052DC0F /* yellowhenna2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 456DAD7E207D2C7A0052DC0F /* yellowhenna2.jpg */; };
 		45720D632078E8650027A2F8 /* skates.scn in Resources */ = {isa = PBXBuildFile; fileRef = 45720D622078E8650027A2F8 /* skates.scn */; };
 		45720D652078E87E0027A2F8 /* skateboard_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45720D642078E87E0027A2F8 /* skateboard_4.jpg */; };
 		45720D672078E8A70027A2F8 /* ViewController+ARSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45720D662078E8A70027A2F8 /* ViewController+ARSessionDelegate.swift */; };
@@ -28,6 +34,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		456DAD76207D2C6E0052DC0F /* coffetable_wt_chair.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = coffetable_wt_chair.scn; sourceTree = "<group>"; };
+		456DAD77207D2C6F0052DC0F /* lamp_wall.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = lamp_wall.scn; sourceTree = "<group>"; };
+		456DAD78207D2C6F0052DC0F /* coke_can.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = coke_can.scn; sourceTree = "<group>"; };
+		456DAD7C207D2C790052DC0F /* COKE.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = COKE.jpg; sourceTree = "<group>"; };
+		456DAD7D207D2C7A0052DC0F /* fab111.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = fab111.bmp; sourceTree = "<group>"; };
+		456DAD7E207D2C7A0052DC0F /* yellowhenna2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yellowhenna2.jpg; sourceTree = "<group>"; };
 		45720D622078E8650027A2F8 /* skates.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = skates.scn; sourceTree = "<group>"; };
 		45720D642078E87E0027A2F8 /* skateboard_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skateboard_4.jpg; sourceTree = "<group>"; };
 		45720D662078E8A70027A2F8 /* ViewController+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARSessionDelegate.swift"; sourceTree = "<group>"; };
@@ -64,6 +76,12 @@
 		A134D81F205EF39A0010793F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				456DAD76207D2C6E0052DC0F /* coffetable_wt_chair.scn */,
+				456DAD7D207D2C7A0052DC0F /* fab111.bmp */,
+				456DAD78207D2C6F0052DC0F /* coke_can.scn */,
+				456DAD7C207D2C790052DC0F /* COKE.jpg */,
+				456DAD77207D2C6F0052DC0F /* lamp_wall.scn */,
+				456DAD7E207D2C7A0052DC0F /* yellowhenna2.jpg */,
 				45720D622078E8650027A2F8 /* skates.scn */,
 				45720D642078E87E0027A2F8 /* skateboard_4.jpg */,
 				A1F8F3DF205C7173001A91D0 /* ship.png */,
@@ -171,14 +189,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1868C7020604FE40030A517 /* DebugView.xib in Resources */,
+				456DAD7F207D2C7A0052DC0F /* COKE.jpg in Resources */,
 				A10CBCC0205F0B5E00822C63 /* carpet.jpg in Resources */,
 				A1F8F3D7205C6237001A91D0 /* LaunchScreen.storyboard in Resources */,
 				A1F8F3E1205C7173001A91D0 /* ship.png in Resources */,
+				456DAD7A207D2C6F0052DC0F /* lamp_wall.scn in Resources */,
 				A1F8F3D4205C6237001A91D0 /* Assets.xcassets in Resources */,
+				456DAD81207D2C7A0052DC0F /* yellowhenna2.jpg in Resources */,
+				456DAD79207D2C6F0052DC0F /* coffetable_wt_chair.scn in Resources */,
+				456DAD80207D2C7A0052DC0F /* fab111.bmp in Resources */,
 				A10CBCC2205F0EEF00822C63 /* carpet.scn in Resources */,
 				A1F8F3E0205C7173001A91D0 /* ship.scn in Resources */,
 				45720D632078E8650027A2F8 /* skates.scn in Resources */,
 				45720D652078E87E0027A2F8 /* skateboard_4.jpg in Resources */,
+				456DAD7B207D2C6F0052DC0F /* coke_can.scn in Resources */,
 				A1F8F3D2205C6237001A91D0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

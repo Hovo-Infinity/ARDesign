@@ -77,11 +77,29 @@ class ViewController: UIViewController {
         edgeGesture.edges = .left
         sceneView.addGestureRecognizer(edgeGesture)
         edgeGesture.delegate = self
+        let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotateShip(_:)))
+        sceneView.addGestureRecognizer(rotationGesture)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         sceneView.session.pause()
+    }
+    
+    @objc
+    func rotateShip(_ sender:UIRotationGestureRecognizer) {
+        if sender.state == .began {
+            let location = sender.location(in: sceneView)
+            let hitTestResults = sceneView.hitTest(location, options: nil)
+            guard let hitTestResult = hitTestResults.first else {
+                return
+            }
+            let node = hitTestResult.node
+            let rotation = sender.rotation
+            let action = SCNAction.rotate(by: rotation, around: SCNVector3(0, 1, 0), duration: 2)
+            node.runAction(action)
+            sender.rotation = 0
+        }
     }
     
     @objc
@@ -95,11 +113,11 @@ class ViewController: UIViewController {
         let x = translation.x
         let y = translation.y
         let z = translation.z
-        guard let shipScene = SCNScene(named: "skates.scn") else { return }
+        guard let shipScene = SCNScene(named: "ship.scn") else { return }
 
-        let shipNode = shipScene.rootNode
-        shipNode.position = SCNVector3(x,y,z)
-        sceneView.scene.rootNode.addChildNode(shipNode)
+        let shipNode = shipScene.rootNode.childNode(withName: "ship", recursively: true)
+        shipNode?.position = SCNVector3(x, y, z)
+        sceneView.scene.rootNode.addChildNode(shipNode!)
     }
     
     @objc
